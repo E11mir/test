@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var role1;
+        var role2;
+        document.addEventListener("DOMContentLoaded", function (event) {
+            role1 = document.getElementById("player_1_role").textContent;
+            role2 = document.getElementById("player_2_role").textContent;
+        });
+
+        function changePlayer(id) {
+            var name1 = document.getElementById("player_1_name").textContent;
+            var name2 = document.getElementById("player_2_name").textContent;
+            var player_name = prompt("Введите ваше имя", "");
+            while (!((id == 1 && player_name != name2) || (id == 2 && player_name != name1))) {
+                player_name = prompt("Введите другое имя , это  имя уже занято ", "");
+            }
+            var player_role = prompt("Введите вашу букву", "");
+            while (player_role.length > 1) {
+                player_role = prompt("Пожалуйста введите одну букву", "");
+            }
+            while (!((id == 1 && player_role != role2) || (id == 2 && player_role != role1))) {
+                player_role = prompt("Введите другую букву , эта уже занята ", "");
+            }
+
+            document.getElementById("player_" + id + "_name").innerHTML = player_name;
+            document.getElementById("player_" + id + "_role").innerHTML = player_role;
+            role1 = document.getElementById("player_1_role").textContent;
+            role2 = document.getElementById("player_2_role").textContent;
+        }
+        var last_step = document.getElementById("player_2_role").textContent;
+        function setX(button) {
+            console.log(role1);
+            console.log(role2);
+            if (document.getElementById(button).innerHTML == "") {
+                var new_step;
+                if (last_step == role2) {
+                    new_step = role1;
+                    last_step = role1;
+                }
+                else {
+                    new_step = role2;
+                    last_step = role2;
+                }
+                document.getElementById(button).innerHTML = last_step;
+            }
+        }
+    </script>
+    <style>
+        .players_skiny {
+            height: 34px;
+            widows: 100px;
+            background: #c0f10fe8;
+            border: 2px solid #000000;
+            line-height: 34px;
+            margin-top: 4px
+        }
+
+        .square {
+            height: 34px;
+            width: 34px;
+            background: #fff;
+            border: 1px solid #000000;
+            line-height: 34px;
+            margin-top: 4px
+        }
+
+        .sf {
+            height: 34px;
+            width: 34px;
+            background: #fff;
+            border: 0px solid #999;
+            line-height: 34px;
+            margin-top: 4px;
+        }
+
+        #cansel {
+            background: #c0f10fe8;
+            text-align: center;
+            border: 3px solid black;
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>
+            <b id="player_1_name"> Игрок 1 </b>
+            <b id="player_1_role"> X </b>
+            <button class="players_skiny" onClick="changePlayer(1)">Изменить</button>
+        </p>
+        <p>
+            <b id="player_2_name"> Игрок 2 </b>
+            <b id="player_2_role"> O </b>
+            <button class="players_skiny" onClick="changePlayer(2)">Изменить</button>
+        </p>
+    </div>
+    <h1>
+        <p style="text-align:center;">
+            Крестики - нолики
+        </p>
+    </h1>
+    <div align="center">
+        <div>
+
+            <button class="sf">1</button>
+            <button class="sf">2</button>
+            <button class="sf">3</button>
+        </div>
+
+        <button class="square" id="button1" onClick="setX('button1')"></button>
+        <button class="square" id="button2" onClick="setX('button2')"></button>
+        <button class="square" id="button3" onClick="setX('button3')"></button>
+        <button class="sf">1</button>
+        <div>
+            
+        </div>
+        <button class="square" id="button4" onClick="setX('button4')"></button>
+        <button class="square" id="button5" onClick="setX('button5')"></button>
+        <button class="square" id="button6" onClick="setX('button6')"></button>
+        <button class="sf">2</button>
+        <div>
+        </div>
+        <button class="square" id="button7" onClick="setX('button7')"></button>
+        <button class="square" id="button8" onClick="setX('button8')"></button>
+        <button class="square" id="button9" onClick="setX('button9')"></button>
+        <button class="sf">3</button>
+        <div>
+        </div>
+        <button id="cansel">Отменить ход</button>
+    </div>
+</body>
+
+</html>
